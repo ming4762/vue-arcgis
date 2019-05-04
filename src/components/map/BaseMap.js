@@ -10,6 +10,11 @@ export default {
     id: String,
     title: String
   },
+  data () {
+    return {
+      name: 'base-map'
+    }
+  },
   methods: {
     // --------- 公共方法 -------------
     /**

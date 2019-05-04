@@ -89,7 +89,7 @@ export default {
           this.addLayer(child, indexObject.index)
           indexObject.index = indexObject.index + 1
         }
-        if (child.$children.length > 0) {
+        if (child.$children.length > 0 && child.name !== 'base-map') {
           this.recursionInit(child.$children, indexObject)
         }
       })
