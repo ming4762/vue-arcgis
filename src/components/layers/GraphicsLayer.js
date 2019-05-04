@@ -1,18 +1,14 @@
 import BaseLayer from './BaseLayer'
 import GisUtil from '../utils/GisUtil'
+import { LAYER_TYPE, getSymbol } from '../Common'
 
 const name = 'graphics-layer'
 
 let GisGraphicsLayer = null
 
-export const LAYER_TYPE = {
-  POINT: 'point',
-  POLYLIE: 'polyline',
-  POLYGON: 'polygon'
-}
-
 /**
  * GraphicsLayer 组件
+ * TODO: (功能加强) 图层类型可以是多样的，可以设置元素类型
  */
 export default {
   name: name,
@@ -183,7 +179,7 @@ export default {
         }
         return {
           geometry: point,
-          symbol: this.getSymbol(pointData, LAYER_TYPE.POINT),
+          symbol: getSymbol(pointData, LAYER_TYPE.POINT, this.symbol),
           attributes: pointData.attributes
         }
       })
@@ -199,7 +195,7 @@ export default {
         }
         return {
           geometry: polyline,
-          symbol: this.getSymbol(lineData, LAYER_TYPE.POLYLIE),
+          symbol: getSymbol(lineData, LAYER_TYPE.POLYLIE, this.symbol),
           attributes: lineData.attributes
         }
       })
@@ -217,47 +213,13 @@ export default {
         }
         return {
           geometry: polygon,
-          symbol: this.getSymbol(polygonData, LAYER_TYPE.POLYGON),
+          symbol: getSymbol(polygonData, LAYER_TYPE.POLYGON, this.symbol),
           attributes: polygonData.attributes
         }
       })
-    },
-    /**
-     * 获取样式
-     * @param pointData 点数据
-     * @param type 类型
-     */
-    getSymbol: function (pointData, type) {
-      if (pointData.symbol) {
-        return pointData.symbol
-      } else if (this.symbol) {
-        return this.symbol
-      } else {
-        if (type === LAYER_TYPE.POINT) {
-          return {
-            type: 'simple-marker',
-            color: [226, 119, 40]
-          }
-        } else if (type === LAYER_TYPE.POLYLIE) {
-          return {
-            type: 'simple-line',
-            color: [226, 119, 40],
-            width: 4
-          }
-        } else if (type === LAYER_TYPE.POLYGON) {
-          return {
-            type: 'simple-fill',
-            color: [227, 139, 79, 0.8],
-            outline: {
-              color: [255, 255, 255],
-              width: 1
-            }
-          }
-        }
-      }
     }
   },
   render (h) {
-    return undefined;
+    return undefined
   }
 }
