@@ -1,6 +1,6 @@
 import esriLoader from 'esri-loader'
 
-import { gisOption } from '../config/GisConfig'
+import { gisOption } from '../gisConfig/GisConfig'
 /**
  * gis工具类
  */

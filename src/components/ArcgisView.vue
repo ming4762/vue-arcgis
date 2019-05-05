@@ -1,6 +1,6 @@
 <script>
 import GisUtil from './utils/GisUtil'
-import { gisOption } from './config/GisConfig'
+import { gisOption } from './gisConfig/GisConfig'
 
 export const ViewType = {
   VIEW_3D: '3D',
