@@ -225,7 +225,6 @@ export default {
           this.oneCreatedEvent(view)
         })
       }
-      console.log(view)
       // 移除下方介绍
       view.ui.remove('attribution')
       if (this.showCursorXY) {

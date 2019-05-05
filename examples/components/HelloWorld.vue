@@ -42,6 +42,12 @@ export default class HelloWorld extends Vue<TestMixin> {
   msg: string = 'Welcome to Your Vue-Typescript App'
   mounted () {
     console.log(ArcgisMap.name)
+    setTimeout(() => {
+      this.data.push({
+        x: 120.9081856774994,
+        y: 37.50232919209251
+      })
+    }, 3000)
   }
   visible = true
   handleViewClick (a, b) {
