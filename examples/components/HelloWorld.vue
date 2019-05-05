@@ -1,20 +1,57 @@
 <template>
-  <div>
+  <div style="height: 600px">
+    <ArcgisView
+        @pointer-click="handleViewClick"
+        ref="view"
+        jsBaseUrl="http://charsming.f3322.org:8082/js/arcgis/4.9/dojo"
+        jsUrl="http://charsming.f3322.org:8082/js/arcgis/4.9/init.js">
+      <arcgis-map>
+        <base-map>
+          <web-tile-layer
+              preset="shandong"/>
+        </base-map>
+        <!-- 测试图层 -->
+        <graphics-layer
+            :data="data"
+            graphicType="point"></graphics-layer>
+      </arcgis-map>
+    </ArcgisView>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import TestMixin from '../mixins/test-mixin'
+import Component from 'vue-class-component'
+import { ArcgisView, ArcgisMap, BaseMap, WebTileLayer, GraphicsLayer } from '../../src'
 
-import { CloudTableCRUD, CloudForm } from '../../src/index'
 @Component({
   components: {
+    ArcgisView,
+    ArcgisMap,
+    BaseMap,
+    WebTileLayer,
+    GraphicsLayer
   },
   mixins: [TestMixin]
 })
 export default class HelloWorld extends Vue<TestMixin> {
+  $refs
+  // 5de6cf77ed54ae2360c0182e387db7bc
   msg: string = 'Welcome to Your Vue-Typescript App'
+  mounted () {
+    console.log(ArcgisMap.name)
+  }
+  handleViewClick (a, b) {
+    console.log(this.$refs['view'].getActiveView())
+    console.log(a, b)
+  }
+  data = [
+    {
+      x: 135,
+      y: 37
+    }
+  ]
 }
 </script>
 

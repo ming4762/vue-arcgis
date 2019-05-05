@@ -15,7 +15,7 @@ Object.keys(entry).forEach(function (name) {
   entry[name] = ['./build/dev-client'].concat(entry[name])
 })
 
-console.log(entry)
+console.log(config.examplesDev.env)
 
 module.exports = merge(baseWebpackConfig, {
   mode: 'development',
