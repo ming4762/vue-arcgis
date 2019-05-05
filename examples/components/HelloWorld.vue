@@ -12,6 +12,7 @@
         </base-map>
         <!-- 测试图层 -->
         <graphics-layer
+            :visible="visible"
             :data="data"
             graphicType="point"></graphics-layer>
       </arcgis-map>
@@ -42,6 +43,7 @@ export default class HelloWorld extends Vue<TestMixin> {
   mounted () {
     console.log(ArcgisMap.name)
   }
+  visible = true
   handleViewClick (a, b) {
     console.log(this.$refs['view'].getActiveView())
     console.log(a, b)

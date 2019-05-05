@@ -23,6 +23,22 @@ export default {
       defaultIndex: 0
     }
   },
+  watch: {
+    /**
+     * 监控显示状态变化
+     * @param _new
+     * @param old
+     */
+    visible: function (_new, old) {
+      if (_new !== old) {
+        if (this.layer !== null) {
+          this.layer.visible = _new
+        } else if (_new === true) {
+          this.init()
+        }
+      }
+    }
+  },
   methods: {
     /**
      * 设置回调函数
