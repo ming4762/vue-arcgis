@@ -71,6 +71,14 @@ export default {
     // 创建视图
     this.createView()
   },
+  watch: {
+    extent: {
+      deep: true,
+      handler: function (_new) {
+        this.getActiveView().extent = _new
+      }
+    }
+  },
   methods: {
     // --------- 公共方法 -------------
     /**

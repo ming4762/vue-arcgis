@@ -1,6 +1,7 @@
 <template>
   <div style="height: 600px">
     <ArcgisView
+        :extent="extent"
         @pointer-click="handleViewClick"
         ref="view"
         jsBaseUrl="http://charsming.f3322.org:8082/js/arcgis/4.9/dojo"
@@ -40,6 +41,14 @@ export default class HelloWorld extends Vue<TestMixin> {
   $refs
   // 5de6cf77ed54ae2360c0182e387db7bc
   msg: string = 'Welcome to Your Vue-Typescript App'
+
+  extent = {
+    xmin: 119.514,
+    ymin: 36.496,
+    xmax: 121.941,
+    ymax: 38.413
+  }
+
   mounted () {
     console.log(ArcgisMap.name)
     setTimeout(() => {
@@ -47,6 +56,7 @@ export default class HelloWorld extends Vue<TestMixin> {
         x: 120.9081856774994,
         y: 37.50232919209251
       })
+      this.extent.xmin = 115.0
     }, 3000)
   }
   visible = true
