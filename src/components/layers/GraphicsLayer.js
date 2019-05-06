@@ -85,10 +85,10 @@ export default {
           if (ymax === 0 || ymax < extent.ymax) {
             ymax = extent.ymax
           }
-          if (xmin === 0 || xmin > extent.xmin) {
+          if (extent.xmin !== null && (xmin === 0 || xmin > extent.xmin)) {
             xmin = extent.xmin
           }
-          if (ymin === 0 || ymin > extent.ymin) {
+          if (extent.ymin !== null && (ymin === 0 || ymin > extent.ymin)) {
             ymin = extent.ymin
           }
         })
@@ -181,11 +181,11 @@ export default {
      */
     addPoint: function (data) {
       return data.map(pointData => {
-        const point = {
+        const point = this.addSpatialReference({
           type: 'point',
           longitude: pointData.x,
           latitude: pointData.y
-        }
+        }, pointData)
         return {
           geometry: point,
           symbol: getSymbol(pointData, LAYER_TYPE.POINT, this.symbol),
@@ -198,10 +198,10 @@ export default {
      */
     addPolyline: function (data) {
       return data.map(lineData => {
-        const polyline = {
+        const polyline = this.addSpatialReference({
           type: 'polyline',
           paths: lineData.paths
-        }
+        }, lineData)
         return {
           geometry: polyline,
           symbol: getSymbol(lineData, LAYER_TYPE.POLYLIE, this.symbol),
@@ -216,16 +216,30 @@ export default {
      */
     addPolygon: function (data) {
       return data.map(polygonData => {
-        const polygon = {
+        const polygon = this.addSpatialReference({
           type: 'polygon',
           rings: polygonData.rings
-        }
+        }, polygonData)
         return {
           geometry: polygon,
           symbol: getSymbol(polygonData, LAYER_TYPE.POLYGON, this.symbol),
           attributes: polygonData.attributes
         }
       })
+    },
+    /**
+     * 添加spatialReference
+     * @param geometry
+     * @param data
+     * @returns {*}
+     */
+    addSpatialReference: function (geometry, data) {
+      if (data.spatialReference) {
+        geometry = Object.assign({
+          spatialReference: data.spatialReference
+        }, geometry)
+      }
+      return geometry
     }
   },
   render (h) {

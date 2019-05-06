@@ -64,7 +64,7 @@ export default {
       }
       // 设置样式
       this.graphicDataList.forEach(graphic => {
-        graphic.symbol = this.getSymbol(graphic, response.geometryType, this.symbol)
+        graphic.symbol = getSymbol(graphic, response.geometryType, this.symbol)
       })
       this.addGraphics()
     },
@@ -148,5 +148,8 @@ export default {
       }
       return properties
     }
+  },
+  render (h) {
+    return undefined
   }
 }

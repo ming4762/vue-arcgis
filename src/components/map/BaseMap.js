@@ -49,6 +49,12 @@ export default {
     }
   },
   render (h) {
-    return this.$slots.default
+    return (
+      <div>
+        {
+          this.$slots.default
+        }
+      </div>
+    )
   }
 }
