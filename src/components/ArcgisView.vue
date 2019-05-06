@@ -47,20 +47,22 @@ export default {
     }
   },
   data () {
+    const elementId = new Date().getTime() + ''
     return {
       // 视图容器
       viewContainer: {
         mapView: null,
         sceneView: null,
         activeView: null,
-        container: 'viewDiv'
+        container: elementId
       },
       // 鼠标点
       cursorPoint: {},
       // 地图对象
       map: {},
       // 地图vue实例
-      mapVue: null
+      mapVue: null,
+      elementId: elementId
     }
   },
   created () {
@@ -309,7 +311,7 @@ export default {
   render (h) {
     return (
       <div class="arcgis-full-height">
-        <div id="viewDiv" class="arcgis-full-height"/>
+        <div id={this.elementId} class="arcgis-full-height"/>
         {
           this.mixed
             ? <div class="view-switch">
