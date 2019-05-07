@@ -39,13 +39,26 @@ export default {
       if (this.title != null) {
         properties.title = this.title
       }
-      // 初始化地图图层
-      for (let i = 0; i < this.$children.length; i++) {
-        const layerVue = this.$children[i]
-        const layer = await layerVue.init()
-        properties.baseLayers.push(layer)
+      // 初始化图层
+      if (this.$children.length > 0) {
+        await this.recursionInit(this.$children, properties)
       }
       return properties
+    },
+    /**
+     * 使用递归初始化图层
+     */
+    recursionInit: async function (children, properties) {
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i]
+        if (child['type'] === 'layer') {
+          const layer = await child.init()
+          properties.baseLayers.push(layer)
+        }
+        if (child.$children.length > 0 && child.name !== 'base-map') {
+          await this.recursionInit(child.$children, properties)
+        }
+      }
     }
   },
   render (h) {

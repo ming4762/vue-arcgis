@@ -11,12 +11,7 @@
         <base-map>
           <web-tile-layer
               preset="shandong"/>
-          <FeatureLayer
-              id="borderLayer"
-              :featureLoadedCallback="dealAddvcdBorder"
-              :symbol="borderSymble"
-              :query="{}"
-              url="http://charsming.f3322.org:6080/arcgis/rest/services/HZZ_XHAXQ/MapServer/6"></FeatureLayer>
+          <test-child-layer/>
         </base-map>
         <!-- 测试图层 -->
         <graphics-layer
@@ -50,6 +45,8 @@ import TestMixin from '../mixins/test-mixin'
 import Component from 'vue-class-component'
 import { ArcgisView, ArcgisMap, BaseMap, WebTileLayer, GraphicsLayer, FeatureLayer } from '../../src'
 
+import TestChildLayer from './TestChildLayer.vue'
+
 @Component({
   components: {
     ArcgisView,
@@ -57,7 +54,8 @@ import { ArcgisView, ArcgisMap, BaseMap, WebTileLayer, GraphicsLayer, FeatureLay
     BaseMap,
     WebTileLayer,
     GraphicsLayer,
-    FeatureLayer
+    FeatureLayer,
+    TestChildLayer
   },
   mixins: [TestMixin]
 })

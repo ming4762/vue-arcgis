@@ -335,9 +335,6 @@ export default {
 
 <style>
   @import url("../../css/arcgis/esri/css/main.css");
-  .esri-attribution {
-    display: none;
-  }
   .view-switch {
     position: absolute;
     top: 15px;
@@ -345,7 +342,7 @@ export default {
   }
   .view-switch input {
     border: none;
-    box-shadow:  rgba(0, 0, 0, 0.3) 0px 1px 2px;
+    box-shadow:  rgba(0, 0, 0, 0.3) 0 1px 2px;
   }
   .arcgis-full-height {
     height: 100%;
