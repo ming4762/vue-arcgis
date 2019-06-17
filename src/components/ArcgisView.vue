@@ -10,6 +10,29 @@ export const ViewType = {
 const events = {
   switchView: 'switch-view'
 }
+
+/**
+ * arcgis 原生事件
+ */
+const ARCGIS_EVENT = [
+  'blur',
+  'double-click',
+  'drag',
+  'focus',
+  'hold',
+  'immediate-click',
+  'key-down',
+  'key-up',
+  'layerview-create',
+  'layerview-destroy',
+  'mouse-wheel',
+  'pointer-down',
+  'pointer-enter',
+  'pointer-leave',
+  'pointer-up',
+  'resize'
+]
+
 /**
  * 视图组件
  */
@@ -291,6 +314,12 @@ export default {
           }
         })
       }
+      // 绑定其他事件
+      ARCGIS_EVENT.forEach(eventName => {
+        if (this.$listeners[eventName]) {
+          view.on(eventName, this.$listeners[eventName])
+        }
+      })
     },
     /**
      * 显示xy坐标
